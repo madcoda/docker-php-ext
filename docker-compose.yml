@@ -1,0 +1,30 @@
+# A docker-compose file for testing purpose
+php56fpm:
+  build: ./5.6-fpm
+  volumes:
+    - ./webroot:/var/www/html
+  expose:
+    - 8000
+  ports:
+    - 8000
+  entrypoint:
+    - php
+    - -S
+    - 0.0.0.0:8000
+    - -t
+    - /var/www/html
+
+php70fpm:
+  build: ./7.0-fpm
+  volumes:
+    - ./webroot:/var/www/html
+  expose:
+    - 8000
+  ports:
+    - 8000
+  entrypoint:
+    - php
+    - -S
+    - 0.0.0.0:8000
+    - -t
+    - /var/www/html
