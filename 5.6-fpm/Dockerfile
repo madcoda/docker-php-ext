@@ -1,5 +1,7 @@
 FROM php:5.6-fpm
 
+RUN usermod -u 1000 www-data
+
 # install the PHP extensions we need
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -10,6 +12,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
-RUN rm -rf /var/lib/apt/lists/*
+# Customize: Install extra packages you want here
+# example: RUN apt-get install -y git
 
-RUN usermod -u 1000 www-data
+
+# Remove the junk files that you don't need
+RUN rm -rf /var/lib/apt/lists/*
